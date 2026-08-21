@@ -40,7 +40,7 @@ jobs:
       #   run: npm ci --workspaces=false
 
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish --access public --no-git-tag-version
 
       - name: Commit and push version update
         run: |
