@@ -34,13 +34,13 @@ jobs:
       - name: Update package version
         run: |
           TAG=${{ github.event.release.tag_name }}
-          npm version ${TAG#v}
+          npm version ${TAG#v} --no-git-tag-version
 
       # - name: Post-version-update ci ## For tests, apparently
       #   run: npm ci --workspaces=false
 
       - name: Publish to npm
-        run: npm publish --access public --no-git-tag-version
+        run: npm publish --access public
 
       - name: Commit and push version update
         run: |
