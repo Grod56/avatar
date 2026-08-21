@@ -86,6 +86,8 @@ test('sourceLogic: initials', (t) => {
     fontSize: 16,
     fontWeight: 400,
   });
+  // eslint-disable-next-line no-console
+  console.log(setSource.args);
   t.true(
     setSource.calledWith(
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAABmJLR0QA/wD/AP+gvaeTAAABlElEQVR4nO3TMYoiYRBA4ZoBNfEABp0oJsZexBOImYlBJ+pFPIBo2LfoG3QqiAfwACZKbbCDMCyzu8yD0WHel/4VFI/6IyKyaZqs6zojIne7Xer/vcabfr8fERHH4zE+slqtYrFYfPj+E90DFkURo9EoqqqK2+32x+D5fI7NZhOtVutLF/wOsmmazMzc7/cZEVmWZV6v1/uZXi6XnEwm2e1283Q6PeizPKd3ATMzl8tlRkQOBoOczWY5nU6zKIrsdDpZVdUDV31OL+v1OsuyjF6vdz/Juq5ju93G4XCIdrsd4/E45vN5DIfDB32S5/WS+fsM9Tmv/x7R3xgQMiBkQMiAkAEhA0IGhAwIGRAyIGRAyICQASEDQgaEDAgZEDIgZEDIgJABIQNCBoQMCBkQMiBkQMiAkAEhA0IGhAwIGRAyIGRAyICQASEDQgaEDAgZEDIgZEDIgJABIQNCBoQMCBkQMiBkQMiAkAEhA0IGhAwIGRAyIGRAyICQASEDQgaEDAgZEDIgZEDIgJABIQNCBoQMCP0CeN2x7RPgH5gAAAAASUVORK5CYII=',

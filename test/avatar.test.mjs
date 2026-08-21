@@ -6,7 +6,7 @@ import { promisify } from 'node:util';
 import test from 'ava';
 import nock from 'nock';
 import { spy, stub } from 'sinon';
-import Avatar from '../esm';
+import Avatar from '../esm/index';
 
 const withCallback = (fn) => async (t) => {
   await promisify(fn)(t);
