@@ -1,0 +1,31 @@
+name: "build package"
+on:
+    pull_request:
+        branches:
+            - main
+    push:
+        branches:
+            - main
+
+jobs:
+    build-package:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v6
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: "24"
+                  registry-url: "https://registry.npmjs.org/"
+                  cache: "npm"
+
+            - name: Installing Dependencies
+              run: |
+                  npm ci
+                  npm install -g coveralls
+
+            - name: Validation and Testing
+              run: |
+                  npm run validate --prod
+                  npm run make
+                  npm run test && nyc report --reporter=text-lcov | coveralls
