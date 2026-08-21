@@ -1,13 +1,6 @@
-[![view on npm](https://img.shields.io/npm/v/avatar-initials.svg)](https://www.npmjs.org/package/avatar-initials)
-[![npm module downloads](https://img.shields.io/npm/dt/avatar-initials.svg)](https://www.npmjs.org/package/avatar-initials)
-[![Build Status](https://travis-ci.com/MatthewCallis/avatar.svg?branch=master)](https://travis-ci.com/MatthewCallis/avatar)
-[![Coverage Status](https://coveralls.io/repos/github/MatthewCallis/avatar/badge.svg?branch=master)](https://coveralls.io/github/MatthewCallis/avatar?branch=master)
-[![Tree-Shaking Support](https://badgen.net/bundlephobia/tree-shaking/avatar-initials)](https://bundlephobia.com/result?p=avatar-initials)
-[![Dependency Count](https://badgen.net/bundlephobia/dependency-count/avatar-initials)](https://bundlephobia.com/result?p=avatar-initials)
-[![Minified + GZip](https://badgen.net/bundlephobia/minzip/avatar-initials)](https://bundlephobia.com/result?p=avatar-initials)
-[![Minified](https://badgen.net/bundlephobia/min/avatar-initials)](https://bundlephobia.com/result?p=avatar-initials)
-
 # [Avatar](http://matthewcallis.github.io/avatar/)
+
+(_Fork of the [original](https://www.npmjs.org/package/avatar-initials)_ `avatar-initials`)
 
 Avatar is a JavaScript library & React component for showing [Gravatars](https://en.gravatar.com/) or generating user avatars.
 
@@ -16,36 +9,36 @@ Avatar is a JavaScript library & React component for showing [Gravatars](https:/
 There are several examples [on the website](http://matthewcallis.github.io/avatar/).
 
 ```js
-import Avatar from 'avatar-initials';
+import Avatar from "@grod56/avatar-initials";
 // or
-const Avatar = require('avatar-initials');
+const Avatar = require("avatar-initials");
 
 // Add an avatar to an <img>
-const avatar = Avatar.from(document.getElementById('avatar'), {
-  'useGravatar': false,
-  'initials': 'MC',
+const avatar = Avatar.from(document.getElementById("avatar"), {
+	useGravatar: false,
+	initials: "MC",
 });
 
 // If you just want the URL / string:
 const github_avatar_url = Avatar.githubAvatar({
-  id: '12345'
+	id: "12345",
 });
 
 const gravatar_url_from_email = Avatar.gravatarUrl({
-  email: 'test@test.test'
+	email: "test@test.test",
 });
 
 const gravatar_url_from_hash = Avatar.gravatarUrl({
-  hash: '12929016fffb0b3af98bc440acf0bfe2'
+	hash: "12929016fffb0b3af98bc440acf0bfe2",
 });
 
 const initial_png = Avatar.initialAvatar({
-  initials: 'MC',
-  initial_fg: '#888888',
-  initial_bg: '#f4f6f7',
-  initial_size: 0, // Defaults to height / 2
-  initial_weight: 100,
-  initial_font_family: "'Lato', 'Lato-Regular', 'Helvetica Neue'",
+	initials: "MC",
+	initial_fg: "#888888",
+	initial_bg: "#f4f6f7",
+	initial_size: 0, // Defaults to height / 2
+	initial_weight: 100,
+	initial_font_family: "'Lato', 'Lato-Regular', 'Helvetica Neue'",
 });
 ```
 
@@ -56,28 +49,34 @@ This example will render an avatar with my initials "MC" as the image.
 A simple React example:
 
 ```jsx
-import { AvatarComponent } from 'avatar-initials';
+import { AvatarComponent } from "avatar-initials";
 
 export default function Example() {
-  // ...
-  return (
-    <div className={`w-full flex self-center items-center justify-between relative ${classes}`}>
-      <button type="button" onClick={() => setShowMenu(true)} title="Open Menu">
-        <AvatarComponent
-          classes="rounded-full"
-          useGravatar={false}
-          size={44}
-          primarySource={currentUser.Avatar}
-          color="#000000"
-          background="#f1f1f1"
-          fontSize={16}
-          fontWeight={400}
-          offsetY={24}
-          initials={`${currentUser.FirstName[0]}${currentUser.LastName[0]}`}
-        />
-      </button>
-    </div>
-  );
+	// ...
+	return (
+		<div
+			className={`w-full flex self-center items-center justify-between relative ${classes}`}
+		>
+			<button
+				type="button"
+				onClick={() => setShowMenu(true)}
+				title="Open Menu"
+			>
+				<AvatarComponent
+					classes="rounded-full"
+					useGravatar={false}
+					size={44}
+					primarySource={currentUser.Avatar}
+					color="#000000"
+					background="#f1f1f1"
+					fontSize={16}
+					fontWeight={400}
+					offsetY={24}
+					initials={`${currentUser.FirstName[0]}${currentUser.LastName[0]}`}
+				/>
+			</button>
+		</div>
+	);
 }
 ```
 
@@ -134,28 +133,28 @@ The browser build is built with the following `@babel/preset-env` targets:
 
 ```json
 {
-  "android": "109",
-  "chrome": "109",
-  "edge": "109",
-  "firefox": "109",
-  "ios": "16.2",
-  "opera": "92",
-  "safari": "16.2",
-  "samsung": "19"
+	"android": "109",
+	"chrome": "109",
+	"edge": "109",
+	"firefox": "109",
+	"ios": "16.2",
+	"opera": "92",
+	"safari": "16.2",
+	"samsung": "19"
 }
 ```
 
 ### jQuery Wrapper for Avatar
 
 ```javascript
-if (typeof jQuery !== 'undefined') {
-  jQuery.fn.avatar = function avatar(options) {
-    return this.each(() => {
-      if (!jQuery.data(this, 'plugin_avatar')) {
-        jQuery.data(this, 'plugin_avatar', new Avatar(this, options));
-      }
-    });
-  };
+if (typeof jQuery !== "undefined") {
+	jQuery.fn.avatar = function avatar(options) {
+		return this.each(() => {
+			if (!jQuery.data(this, "plugin_avatar")) {
+				jQuery.data(this, "plugin_avatar", new Avatar(this, options));
+			}
+		});
+	};
 }
 ```
 
@@ -164,13 +163,13 @@ if (typeof jQuery !== 'undefined') {
 The settings have changed keys and some new logic was introduced, the logic should not interefere but the keys will need to be updated:
 
 ```md
-  initial_fg            => color
-  initial_bg            => background
-  initial_size          => fontSize
-  initial_weight        => fontWeight
-  initial_font_family   => fontFamily
-  allowGravatarFallback => useGravatarFallback
-  github_id             => github_id
+initial_fg => color
+initial_bg => background
+initial_size => fontSize
+initial_weight => fontWeight
+initial_font_family => fontFamily
+allowGravatarFallback => useGravatarFallback
+github_id => github_id
 ```
 
 ## Thanks
