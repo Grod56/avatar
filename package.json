@@ -1,138 +1,138 @@
 {
-	"name": "@grod56/avatar-initials",
-	"version": "6.0.0",
-	"description": "JavaScript library for showing Gravatars or generating user avatars from initials. Fork of avatar-initials",
-	"author": "Matthew Callis <matthew.callis@gmail.com>",
-	"contributors": [
-		{
-			"name": "Matthew Callis",
-			"email": "matthew.callis@gmail.com"
-		},
-		{
-			"name": "Garikai Gumbo",
-			"email": "me@garikai.org",
-			"web": "https://garikai.org"
-		}
-	],
-	"maintainers": [
-		{
-			"name": "Garikai Gumbo",
-			"email": "me@garikai.org",
-			"web": "https://garikai.org"
-		}
-	],
-	"main": "./src/avatar.js",
-	"module": "./esm/index.js",
-	"types": "./types/index.d.ts",
-	"typings": "./types/index.d.ts",
-	"files": [
-		"browser/*",
-		"esm/*",
-		"src/*",
-		"types/*"
-	],
-	"exports": {
-		".": {
-			"require": "./src/avatar.js",
-			"import": "./esm/index.js",
-			"types": "./types/index.d.ts"
-		}
-	},
-	"homepage": "http://matthewcallis.github.io/avatar/",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Grod56/avatar"
-	},
-	"bugs": {
-		"url": "https://github.com/Grod56/avatar/issues"
-	},
-	"keywords": [
-		"avatar",
-		"gravatar",
-		"initials",
-		"profile photo"
-	],
-	"engines": {
-		"node": ">= 12"
-	},
-	"optionalDependencies": {
-		"@types/react": "^18.3.31",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1"
-	},
-	"devDependencies": {
-		"@babel/preset-env": "^7.29.7",
-		"@rollup/plugin-babel": "^6.1.0",
-		"@rollup/plugin-commonjs": "^24.1.0",
-		"@rollup/plugin-terser": "^0.4.4",
-		"@typescript-eslint/parser": "^5.62.0",
-		"ava": "^5.3.1",
-		"browser-env": "^3.3.0",
-		"c8": "^12.0.0",
-		"canvas": "^3.2.3",
-		"core-js": "^3.50.0",
-		"cross-env": "^10.1.0",
-		"eslint": "^8.57.1",
-		"eslint-config-airbnb": "^19.0.4",
-		"eslint-plugin-anti-trojan-source": "^1.1.7",
-		"eslint-plugin-ava": "^14.0.0",
-		"eslint-plugin-import": "^2.32.0",
-		"eslint-plugin-jsdoc": "^39.9.1",
-		"eslint-plugin-jsx-a11y": "^6.10.2",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-optimize-regex": "^1.2.1",
-		"eslint-plugin-react": "^7.37.5",
-		"eslint-plugin-react-hooks": "^4.6.2",
-		"eslint-plugin-security": "^1.7.1",
-		"eslint-plugin-xss": "^0.1.12",
-		"jsdom": "^30.0.1",
-		"nock": "^14.0.17",
-		"precommit-hook-eslint": "^3.0.0",
-		"release-it": "^15.11.0",
-		"rollup": "^3.30.0",
-		"sinon": "^22.1.0",
-		"ts-jest": "^29.4.12",
-		"typescript": "^4.9.5"
-	},
-	"directories": {},
-	"preferGlobal": false,
-	"private": false,
-	"license": "MIT",
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "https://opensource.org/licenses/MIT"
-		}
-	],
-	"scripts": {
-		"lint": "eslint src",
-		"make": "node rollup.config.js",
-		"make-types": "rm -fr types/ && mkdir types && tsc --project .tsconfig.json",
-		"release": "release-it",
-		"test": "cross-env NODE_ENV=test c8 ava",
-		"validate": "npm ls"
-	},
-	"ava": {
-		"files": [
-			"test/**/*.test.mjs"
-		],
-		"cache": false,
-		"concurrency": 1,
-		"failFast": false,
-		"tap": false,
-		"timeout": "1m",
-		"verbose": true,
-		"require": [
-			"./test/setup-browser-env.mjs"
-		]
-	},
-	"c8": {
-		"cache": false,
-		"all": true,
-		"check-coverage": false,
-		"include": [
-			"src/avatar.js",
-			"esm/AvatarComponent.js"
-		]
-	}
+  "name": "@grod56/avatar-initials",
+  "version": "6.0.0",
+  "description": "JavaScript library for showing Gravatars or generating user avatars from initials. Fork of avatar-initials",
+  "author": "Matthew Callis <matthew.callis@gmail.com>",
+  "contributors": [
+    {
+      "name": "Matthew Callis",
+      "email": "matthew.callis@gmail.com"
+    },
+    {
+      "name": "Garikai Gumbo",
+      "email": "me@garikai.org",
+      "web": "https://garikai.org"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Garikai Gumbo",
+      "email": "me@garikai.org",
+      "web": "https://garikai.org"
+    }
+  ],
+  "main": "./src/avatar.js",
+  "module": "./esm/index.js",
+  "types": "./types/index.d.ts",
+  "typings": "./types/index.d.ts",
+  "files": [
+    "browser/*",
+    "esm/*",
+    "src/*",
+    "types/*"
+  ],
+  "exports": {
+    ".": {
+      "require": "./src/avatar.js",
+      "import": "./esm/index.js",
+      "types": "./types/index.d.ts"
+    }
+  },
+  "homepage": "http://matthewcallis.github.io/avatar/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Grod56/avatar"
+  },
+  "bugs": {
+    "url": "https://github.com/Grod56/avatar/issues"
+  },
+  "keywords": [
+    "avatar",
+    "gravatar",
+    "initials",
+    "profile photo"
+  ],
+  "engines": {
+    "node": ">= 12"
+  },
+  "optionalDependencies": {
+    "@types/react": "^18.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.7",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@typescript-eslint/parser": "^5.62.0",
+    "ava": "^5.3.1",
+    "browser-env": "^3.3.0",
+    "c8": "^12.0.0",
+    "canvas": "^3.2.3",
+    "core-js": "^3.50.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-anti-trojan-source": "^1.1.7",
+    "eslint-plugin-ava": "^14.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsdoc": "^39.9.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-optimize-regex": "^1.2.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-security": "^1.7.1",
+    "eslint-plugin-xss": "^0.1.12",
+    "jsdom": "^30.0.1",
+    "nock": "^14.0.17",
+    "precommit-hook-eslint": "^3.0.0",
+    "release-it": "^15.11.0",
+    "rollup": "^3.30.0",
+    "sinon": "^22.1.0",
+    "ts-jest": "^29.4.12",
+    "typescript": "^4.9.5"
+  },
+  "directories": {},
+  "preferGlobal": false,
+  "private": false,
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ],
+  "scripts": {
+    "lint": "eslint src",
+    "make": "node rollup.config.js",
+    "make-types": "rm -fr types/ && mkdir types && tsc --project .tsconfig.json",
+    "release": "release-it",
+    "test": "cross-env NODE_ENV=test ava",
+    "validate": "npm ls"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.mjs"
+    ],
+    "cache": false,
+    "concurrency": 1,
+    "failFast": false,
+    "tap": false,
+    "timeout": "1m",
+    "verbose": true,
+    "require": [
+      "./test/setup-browser-env.mjs"
+    ]
+  },
+  "c8": {
+    "cache": false,
+    "all": true,
+    "check-coverage": false,
+    "include": [
+      "src/avatar.js",
+      "esm/AvatarComponent.js"
+    ]
+  }
 }
