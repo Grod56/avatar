@@ -110,7 +110,7 @@
     "make": "node rollup.config.js",
     "make-types": "rm -fr types/ && mkdir types && tsc --project .tsconfig.json",
     "release": "release-it",
-    "test": "cross-env NODE_ENV=test c8 ava",
+    "test": "cross-env NODE_ENV=test c8 --reporter=lcov ava",
     "validate": "npm ls"
   },
   "ava": {
