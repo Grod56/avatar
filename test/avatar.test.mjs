@@ -6,7 +6,8 @@ import { promisify } from 'node:util';
 import test from 'ava';
 import nock from 'nock';
 import { spy, stub } from 'sinon';
-import Avatar from '../esm/index';
+// eslint-disable-next-line import/extensions
+import Avatar from '../esm/index.js';
 
 const withCallback = (fn) => async (t) => {
   await promisify(fn)(t);
