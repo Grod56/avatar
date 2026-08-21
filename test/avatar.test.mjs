@@ -1,8 +1,12 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable ava/no-skip-test */
 import { promisify } from 'node:util';
+// eslint-disable-next-line node/no-missing-import
 import test from 'ava';
 import nock from 'nock';
-import sinon from 'sinon';
+import { spy, stub } from 'sinon';
+// eslint-disable-next-line import/extensions
 import Avatar from '../esm/index.js';
 
 const withCallback = (fn) => async (t) => {
@@ -56,13 +60,18 @@ test.afterEach.always(() => {
 });
 
 test('#constructor should throw an error without an element', (t) => {
-  t.throws(Avatar, { message: 'Class constructor Avatar cannot be invoked without \'new\'' });
+  t.throws(Avatar, {
+    message: "Class constructor Avatar cannot be invoked without 'new'",
+  });
 });
 
 test('#constructor should throw an error if there is no element provided', (t) => {
-  t.throws(() => {
-    Avatar.from();
-  }, { message: 'No image element provided.' });
+  t.throws(
+    () => {
+      Avatar.from();
+    },
+    { message: 'No image element provided.' },
+  );
 });
 
 test('#constructor should render', (t) => {
@@ -140,12 +149,15 @@ test('#constructor should be able to set the settings', (t) => {
 });
 
 test('#setSource should throw an error if there is no element', (t) => {
-  t.throws(() => {
-    const image = document.querySelector('#avatar-1');
-    const avatar = new Avatar(image);
-    delete avatar.element;
-    avatar.setSource();
-  }, { message: 'No image element set.' });
+  t.throws(
+    () => {
+      const image = document.querySelector('#avatar-1');
+      const avatar = new Avatar(image);
+      delete avatar.element;
+      avatar.setSource();
+    },
+    { message: 'No image element set.' },
+  );
 });
 
 test('#setSource should set the src attribute', (t) => {
@@ -161,22 +173,25 @@ test('#setSource should set the src attribute', (t) => {
   t.is(image.src, 'http://placekitten.com/200/300');
 });
 
-test('#setSource should call setSourceCallback if provided', withCallback((t, end) => {
-  let output;
+test(
+  '#setSource should call setSourceCallback if provided',
+  withCallback((t, end) => {
+    let output;
 
-  const image = document.querySelector('#avatar-1');
-  const avatar = new Avatar(image, {
-    setSourceCallback(source) {
-      output = source;
-    },
-  });
-  avatar.setSource('data:image/png;');
+    const image = document.querySelector('#avatar-1');
+    const avatar = new Avatar(image, {
+      setSourceCallback(source) {
+        output = source;
+      },
+    });
+    avatar.setSource('data:image/png;');
 
-  setTimeout(() => {
-    t.is(output, 'data:image/png;');
-    end();
-  }, gravatar_timeout);
-}));
+    setTimeout(() => {
+      t.is(output, 'data:image/png;');
+      end();
+    }, gravatar_timeout);
+  }),
+);
 
 test('#setSource should do nothing if there is no source provided', (t) => {
   const image = document.querySelector('#avatar-1');
@@ -210,7 +225,10 @@ test('Avatar.githubAvatar should return a GitHub Avatar URL via instance', (t) =
     githubId: 67945,
     size: 80,
   });
-  t.regex(avatar.element.src, /https:\/\/avatars[0-3]?.githubusercontent.com\/u\/\d+\?s=\d{1,4}&v=4/i);
+  t.regex(
+    avatar.element.src,
+    /https:\/\/avatars[0-3]?.githubusercontent.com\/u\/\d+\?s=\d{1,4}&v=4/i,
+  );
 });
 
 test('Avatar.githubAvatar should return a GitHub Avatar URL', (t) => {
@@ -218,17 +236,26 @@ test('Avatar.githubAvatar should return a GitHub Avatar URL', (t) => {
     githubId: 67945,
     size: 80,
   });
-  t.regex(github_url, /https:\/\/avatars[0-3]?.githubusercontent.com\/u\/\d+\?s=\d{1,4}&v=4/i);
+  t.regex(
+    github_url,
+    /https:\/\/avatars[0-3]?.githubusercontent.com\/u\/\d+\?s=\d{1,4}&v=4/i,
+  );
 });
 
 test('Avatar.githubAvatar should not throw an error with no settings', (t) => {
   const github_url = Avatar.githubAvatar({});
-  t.regex(github_url, /https:\/\/avatars[0-3]?.githubusercontent.com\/u\/\d+\?s=\d{1,4}&v=4/i);
+  t.regex(
+    github_url,
+    /https:\/\/avatars[0-3]?.githubusercontent.com\/u\/\d+\?s=\d{1,4}&v=4/i,
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL as a static method', (t) => {
   const url = Avatar.gravatarUrl({});
-  t.is(url, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x');
+  t.is(
+    url,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a custom settings', (t) => {
@@ -248,7 +275,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with an email address', (t
     useGravatarFallback: true,
     email: 'test@test.com',
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s=80&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s=80&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with an hash', (t) => {
@@ -257,13 +287,19 @@ test('Avatar.gravatarUrl should return a Gravatar URL with an hash', (t) => {
     useGravatarFallback: true,
     hash: 'b642b4217b34b1e8d3bd915fc65c4452',
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s=80&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s=80&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with nothing', (t) => {
   const image = document.querySelector('#avatar-1');
   const avatar = new Avatar(image, { useGravatarFallback: true });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a custom size', (t) => {
@@ -272,7 +308,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a custom size', (t) =
     useGravatarFallback: true,
     size: 100,
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=100&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=100&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a custom size (string)', (t) => {
@@ -281,7 +320,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a custom size (string
     useGravatarFallback: true,
     size: '100',
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=100&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=100&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a minimum size of 80px', (t) => {
@@ -290,7 +332,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a minimum size of 80p
     useGravatarFallback: true,
     size: 0,
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a maximum size of 2048px', (t) => {
@@ -299,7 +344,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a maximum size of 204
     useGravatarFallback: true,
     size: 4000,
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a custom fallback (class)', (t) => {
@@ -308,7 +356,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a custom fallback (cl
     useGravatarFallback: true,
     fallback: 'test',
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=test&r=x');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=test&r=x',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a custom rating', (t) => {
@@ -317,7 +368,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a custom rating', (t)
     useGravatarFallback: true,
     rating: 'g',
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=g');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=g',
+  );
 });
 
 test('Avatar.gravatarUrl should return a Gravatar URL with a forced default', (t) => {
@@ -326,7 +380,10 @@ test('Avatar.gravatarUrl should return a Gravatar URL with a forced default', (t
     useGravatarFallback: true,
     forcedefault: true,
   });
-  t.is(avatar.element.src, 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x&f=y');
+  t.is(
+    avatar.element.src,
+    'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&d=mm&r=x&f=y',
+  );
 });
 
 test('#gravatarValid with an invalid Gravatar hash should return an error', async (t) => {
@@ -335,15 +392,15 @@ test('#gravatarValid with an invalid Gravatar hash should return an error', asyn
     useGravatar: true,
   });
 
-  const load_spy = sinon.spy();
-  const error_spy = sinon.spy();
+  const load_spy = spy();
+  const error_spy = spy();
 
-  await new Promise((resolve, reject) => {
-    sinon.stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
+  await new Promise((resolve) => {
+    stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
       load_spy();
       resolve();
     });
-    sinon.stub(avatar, 'gravatarValidOnError').callsFake(() => {
+    stub(avatar, 'gravatarValidOnError').callsFake(() => {
       error_spy();
       resolve();
     });
@@ -363,15 +420,15 @@ test('#gravatarValid with a valid Gravatar hash should not return an error', asy
     useGravatar: true,
   });
 
-  const load_spy = sinon.spy();
-  const error_spy = sinon.spy();
+  const load_spy = spy();
+  const error_spy = spy();
 
-  await new Promise((resolve, reject) => {
-    sinon.stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
+  await new Promise((resolve) => {
+    stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
       load_spy();
       resolve();
     });
-    sinon.stub(avatar, 'gravatarValidOnError').callsFake(() => {
+    stub(avatar, 'gravatarValidOnError').callsFake(() => {
       error_spy();
       resolve();
     });
@@ -391,15 +448,15 @@ test('#gravatarValid with an invalid Gravatar email should return an error', asy
     useGravatar: true,
   });
 
-  const load_spy = sinon.spy();
-  const error_spy = sinon.spy();
+  const load_spy = spy();
+  const error_spy = spy();
 
-  await new Promise((resolve, reject) => {
-    sinon.stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
+  await new Promise((resolve) => {
+    stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
       load_spy();
       resolve();
     });
-    sinon.stub(avatar, 'gravatarValidOnError').callsFake(() => {
+    stub(avatar, 'gravatarValidOnError').callsFake(() => {
       error_spy();
       resolve();
     });
@@ -419,15 +476,15 @@ test('#gravatarValid with a valid Gravatar email should not return an error', as
     useGravatar: true,
   });
 
-  const load_spy = sinon.spy();
-  const error_spy = sinon.spy();
+  const load_spy = spy();
+  const error_spy = spy();
 
-  await new Promise((resolve, reject) => {
-    sinon.stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
+  await new Promise((resolve) => {
+    stub(avatar, 'gravatarValidOnLoad').callsFake(() => {
       load_spy();
       resolve();
     });
-    sinon.stub(avatar, 'gravatarValidOnError').callsFake(() => {
+    stub(avatar, 'gravatarValidOnError').callsFake(() => {
       error_spy();
       resolve();
     });
@@ -446,8 +503,8 @@ test('#gravatarValidOnLoad should call gravatarUrl with settings', (t) => {
   const avatar = new Avatar(image, {
     useGravatar: false,
   });
-  const call_spy = sinon.spy(avatar, 'gravatarValidOnLoad');
-  const load_spy = sinon.spy(avatar, 'setSource');
+  const call_spy = spy(avatar, 'gravatarValidOnLoad');
+  const load_spy = spy(avatar, 'setSource');
   avatar.gravatarValidOnLoad();
 
   t.true(call_spy.calledOnce);
@@ -460,8 +517,8 @@ test('#gravatarValidOnError should draw an avatar if we have initials', (t) => {
     useGravatar: false,
     initials: 'MC',
   });
-  const call_spy = sinon.spy(avatar, 'gravatarValidOnError');
-  const load_spy = sinon.spy(avatar, 'setSource');
+  const call_spy = spy(avatar, 'gravatarValidOnError');
+  const load_spy = spy(avatar, 'setSource');
 
   avatar.gravatarValidOnError();
   t.is(call_spy.callCount, 1);
@@ -474,9 +531,9 @@ test('#gravatarValidOnError should use the fallback image without initials', (t)
     useGravatar: false,
     initials: '',
   });
-  const call_spy = sinon.spy(avatar, 'gravatarValidOnError');
-  const load_spy = sinon.spy(avatar, 'setSource');
-  const init_spy = sinon.spy(Avatar, 'initialAvatar');
+  const call_spy = spy(avatar, 'gravatarValidOnError');
+  const load_spy = spy(avatar, 'setSource');
+  const init_spy = spy(Avatar, 'initialAvatar');
 
   avatar.gravatarValidOnError();
   t.is(call_spy.callCount, 1);

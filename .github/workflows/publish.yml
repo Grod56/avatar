@@ -1,54 +1,53 @@
 name: publish package
 on:
-    release:
-        types:
-            - published
+  release:
+    types:
+      - published
 
 jobs:
-    publish-package:
-        runs-on:
-            - ubuntu-latest
+  publish-package:
+    runs-on:
+      - ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v6
-              with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  ref: ${{ github.event.repository.default_branch }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.repository.default_branch }}
 
-            - uses: actions/setup-node@v6
-              with:
-                  node-version: "24"
-                  registry-url: "https://registry.npmjs.org/"
-                  cache: "npm"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org/'
+          cache: 'npm'
 
-            - name: Installing Dependencies
-              run: |
-                  npm ci
-                  npm install -g coveralls
+      - name: Installing Dependencies
+        run: |
+          npm ci
 
-            - name: Validation and Testing
-              run: |
-                  npm run validate --prod
-                  npm run make
-                  npm run test && nyc report --reporter=text-lcov | coveralls
+      - name: Validation and Testing
+        run: |
+          npm run validate --prod
+          npm run make
+          npm run test
 
-            - name: Update package version
-              run: |
-                  TAG=${{ github.event.release.tag_name }}
-                  npm version ${TAG#v}
+      - name: Update package version
+        run: |
+          TAG=${{ github.event.release.tag_name }}
+          npm version ${TAG#v}
 
-            # - name: Post-version-update ci ## For tests, apparently
-            #   run: npm ci --workspaces=false
+      # - name: Post-version-update ci ## For tests, apparently
+      #   run: npm ci --workspaces=false
 
-            - name: Publish to npm
-              run: npm publish --access public
+      - name: Publish to npm
+        run: npm publish --access public
 
-            - name: Commit and push version update
-              run: |
-                  git config user.name "github-actions"
-                  git config user.email "github-actions@github.com"
-                  git add package.json package-lock.json
-                  git commit -m "Updated package to ${{ github.event.release.tag_name }}"
-                  git push origin ${{ github.event.repository.default_branch }}
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push version update
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add package.json package-lock.json
+          git commit -m "Updated package to ${{ github.event.release.tag_name }}"
+          git push origin ${{ github.event.repository.default_branch }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
