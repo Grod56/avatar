@@ -1,4 +1,4 @@
-import md5 from './md5';
+import md5 from './md5.js';
 
 /**
  * Avatar is a JavaScript library for showing Gravatars or generating user avatars.
