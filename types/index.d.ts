@@ -2,7 +2,7 @@
 declare module 'md5' {
   export function md5(s: any): any;
 }
-declare module 'avatar-initials' {
+declare module '@grod56/avatar-initials' {
   import * as React from 'react';
 
   /**
@@ -78,7 +78,14 @@ declare module 'avatar-initials' {
      * @param {boolean} settings.forcedefault The Gravatar forcedefault setting
      * @returns {string} A URL to a Gravatar avatar
      */
-    static gravatarUrl({ size, email, hash, fallback, rating, forcedefault }: {
+    static gravatarUrl({
+      size,
+      email,
+      hash,
+      fallback,
+      rating,
+      forcedefault,
+    }: {
       /** The image resolution (width & height), defaults to 80 */
       size?: number;
       /** The email for the Gravatar hash */
@@ -102,7 +109,10 @@ declare module 'avatar-initials' {
      * @param {number} settings.size The image resolution width & height
      * @returns {string} A URL to a GitHub avatar
      */
-    static githubAvatar({ githubId, size }: {
+    static githubAvatar({
+      githubId,
+      size,
+    }: {
       /** The GitHub User ID */
       githubId: number | string;
       /** The image resolution (width & height), defaults to 80 */
@@ -169,7 +179,32 @@ declare module 'avatar-initials' {
    * @param {number} props.githubId A GitHub ID to use to find the avatar, GitHub specific.
    * @returns {React.DetailedReactHTMLElement} The AvatarComponent node.
    */
-  export function AvatarComponent({ classes, useGravatar, useGravatarFallback, initials, color, background, fontSize, fontWeight, fontFamily, offsetX, offsetY, hash, email, size, width, height, fallback, rating, forcedefault, fallbackImage, githubId, alt, title, primarySource }: {
+  export function AvatarComponent({
+    classes,
+    useGravatar,
+    useGravatarFallback,
+    initials,
+    color,
+    background,
+    fontSize,
+    fontWeight,
+    fontFamily,
+    offsetX,
+    offsetY,
+    hash,
+    email,
+    size,
+    width,
+    height,
+    fallback,
+    rating,
+    forcedefault,
+    fallbackImage,
+    githubId,
+    alt,
+    title,
+    primarySource,
+  }: {
     /** Classes applied to the IMG node. */
     classes: string;
     /** The width & height of the IMG node. */
