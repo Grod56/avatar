@@ -6,3 +6,4 @@ instrumented
 npm-debug.log
 .nyc-output/
 .nyc_output/
+dist/

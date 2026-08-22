@@ -3,7 +3,7 @@
 // http://www.myersdaily.org/joseph/javascript/md5-text.html
 // http://www.myersdaily.org/joseph/javascript/md5-speed-test.html
 function add32(a, b) {
-  return (a + b) & 0xFFFFFFFF;
+  return (a + b) & 0xffffffff;
 }
 
 function cmn(q, a, b, x, s, t) {
@@ -12,11 +12,11 @@ function cmn(q, a, b, x, s, t) {
 }
 
 function ff(a, b, c, d, x, s, t) {
-  return cmn((b & c) | ((~b) & d), a, b, x, s, t);
+  return cmn((b & c) | (~b & d), a, b, x, s, t);
 }
 
 function gg(a, b, c, d, x, s, t) {
-  return cmn((b & d) | (c & (~d)), a, b, x, s, t);
+  return cmn((b & d) | (c & ~d), a, b, x, s, t);
 }
 
 function hh(a, b, c, d, x, s, t) {
@@ -24,7 +24,7 @@ function hh(a, b, c, d, x, s, t) {
 }
 
 function ii(a, b, c, d, x, s, t) {
-  return cmn(c ^ (b | (~d)), a, b, x, s, t);
+  return cmn(c ^ (b | ~d), a, b, x, s, t);
 }
 
 function md5cycle(x, k) {
@@ -122,10 +122,15 @@ function md5cycle(x, k) {
  * providing access to strings as preformed UTF-8
  * 8-bit unsigned value arrays.
  */
-function md5blk(s) { /* I figured global was faster.   */
+function md5blk(s) {
+  /* I figured global was faster.   */
   const md5blks = []; /* Andy King said do it this way. */
   for (let i = 0; i < 64; i += 4) {
-    md5blks[i >> 2] = s.charCodeAt(i) + (s.charCodeAt(i + 1) << 8) + (s.charCodeAt(i + 2) << 16) + (s.charCodeAt(i + 3) << 24);
+    md5blks[i >> 2] =
+      s.charCodeAt(i) +
+      (s.charCodeAt(i + 1) << 8) +
+      (s.charCodeAt(i + 2) << 16) +
+      (s.charCodeAt(i + 3) << 24);
   }
   return md5blks;
 }
@@ -158,7 +163,7 @@ function rhex(n) {
   let s = '';
   let j = 0;
   for (; j < 4; j++) {
-    s += hex_chr[(n >> ((j * 8) + 4)) & 0x0F] + hex_chr[(n >> (j * 8)) & 0x0F];
+    s += hex_chr[(n >> (j * 8 + 4)) & 0x0f] + hex_chr[(n >> (j * 8)) & 0x0f];
   }
   return s;
 }
@@ -172,4 +177,4 @@ function hex(x) {
 
 const md5 = (s) => hex(md51(s));
 
-module.exports = md5;
+export default md5;
